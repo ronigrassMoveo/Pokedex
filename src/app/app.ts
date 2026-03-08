@@ -7,7 +7,7 @@ import { Header } from './components/header/header';
   standalone: true,
   imports: [RouterOutlet, Header],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrls: ['./app.scss']
 })
 export class App {
   protected readonly title = signal('pokedex');
