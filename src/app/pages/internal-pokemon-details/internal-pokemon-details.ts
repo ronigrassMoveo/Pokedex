@@ -20,8 +20,8 @@ export class InternalPokemonDetails {
       1: {
         id: 1,
         name: 'Bulbasaur',
-        image: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
-        description: 'A strange seed was planted on its back at birth.',
+        image:'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png',
+        description:'A strange seed was planted on its back at birth.The plant sprouts and grows with this POKéMON.',
         types: [{ name: 'Grass' }, { name: 'Poison' }],
         stats: [
           { name: 'HP', value: 45 },

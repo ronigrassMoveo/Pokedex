@@ -1,0 +1,14 @@
+@use '../../../styles/_vars' as vars;
+
+
+.home-page {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$space-md;
+  padding: vars.$space-md;
+}
+
+.home-page__card-link {
+  text-decoration: none;
+  color: inherit;
+}

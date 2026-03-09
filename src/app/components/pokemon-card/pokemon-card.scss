@@ -1,90 +1,223 @@
+@use '../../../styles/vars' as vars;
+
 .pokemon-card {
   width: 100%;
-  border-radius: 16px;
-  padding: 12px;
-  background: #ffffff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: vars.$radius-lg;
+  background: vars.$color-background;
+  box-shadow: vars.$shadow-card;
 
   &--list {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 8px;
+    gap: vars.$space-xs;
+    padding: vars.$space-sm;
     text-align: center;
+    background: vars.$color-white;
   }
 
   &--details {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    align-items: center;
+    padding: vars.$space-md vars.$space-lg vars.$space-xl;
+    min-height: 100%;
   }
 
   &__id {
     margin: 0;
-    font-size: 12px;
-    color: #666666;
+    font-weight: vars.$font-weight-regular;
+    color: vars.$color-text-primary;
+  }
+
+  &__id--details {
+    width: 100%;
+    font-size: vars.$mobile-subtitle-size;
+    line-height: vars.$line-height-relaxed;
+    text-align: left;
+    margin-bottom: vars.$space-sm;
   }
 
   &__image {
-    width: 96px;
-    height: 96px;
     object-fit: contain;
     display: block;
     margin: 0 auto;
   }
 
+  &__image--details {
+    width: 170px;
+    height: 170px;
+    margin-bottom: vars.$space-sm;
+    image-rendering: pixelated;
+  }
+
   &__name {
     margin: 0;
-    font-size: 18px;
-    line-height: 1.2;
     text-transform: capitalize;
     text-align: center;
+    color: vars.$color-text-primary;
+  }
+
+  &__name--details {
+    font-size: vars.$mobile-title-size;
+    line-height: vars.$line-height-base;
+    font-weight: vars.$font-weight-regular;
+    margin-bottom: vars.$space-md;
   }
 
   &__types {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
     justify-content: center;
   }
 
-  &__type {
-    padding: 4px 10px;
-    border-radius: 999px;
-    background: #f2f2f2;
-    font-size: 12px;
-    text-transform: capitalize;
+  &__types--details {
+    display: flex;
+    justify-content: center;
+    gap: vars.$space-sm;
+    margin-bottom: vars.$space-xl;
+    flex-wrap: nowrap;
+  }
+
+    &__type {
+    width: 140px;
+    padding: vars.$space-xs vars.$space-sm;
+    border-radius: vars.$radius-md;
+    font-size: vars.$mobile-subtitle-size;
+    line-height: vars.$line-height-tight;
+    font-weight: vars.$font-weight-regular;
+    color: vars.$color-white;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  &__type--grass {
+    background: vars.$color-type-grass;
+  }
+
+  &__type--poison {
+    background: vars.$color-type-poison;
+  }
+
+  &__type--fire {
+    background: vars.$color-type-fire;
+  }
+
+  &__type--water {
+    background: vars.$color-type-water;
+  }
+
+  &__type--bug {
+    background: vars.$color-type-bug;
+  }
+
+  &__type--normal {
+    background: vars.$color-type-normal;
+  }
+
+  &__type--electric {
+    background: vars.$color-type-electric;
+    color: vars.$color-text-primary;
+  }
+
+  &__type--ground {
+    background: vars.$color-type-ground;
+  }
+
+  &__type--fairy {
+    background: vars.$color-type-fairy;
+  }
+
+  &__type--fighting {
+    background: vars.$color-type-fighting;
+  }
+
+  &__type--psychic {
+    background: vars.$color-type-psychic;
+  }
+
+  &__type--rock {
+    background: vars.$color-type-rock;
+  }
+
+  &__type--ghost {
+    background: vars.$color-type-ghost;
+  }
+
+  &__type--ice {
+    background: vars.$color-type-ice;
+    color: vars.$color-text-primary;
+  }
+
+  &__type--dragon {
+    background: vars.$color-type-dragon;
+  }
+
+  &__type--dark {
+    background: vars.$color-type-dark;
+  }
+
+  &__type--steel {
+    background: vars.$color-type-steel;
+    color: vars.$color-text-primary;
+  }
+
+  &__type--flying {
+    background: vars.$color-type-flying;
+  }
+
+  &__divider {
+    width: 100%;
+    border-top: 1px solid #d3d3d3;
+    margin-bottom: vars.$space-lg;
+  }
+
+  &__section {
+    width: 100%;
+    text-align: center;
+  }
+
+  &__section--stats {
+    margin-top: vars.$space-sm;
+  }
+
+  &__section-title {
+    margin: 0 0 vars.$space-sm;
+    font-size: vars.$mobile-subtitle-size;
+    line-height: vars.$line-height-relaxed;
+    font-weight: vars.$font-weight-semibold;
+    color: vars.$color-text-primary;
   }
 
   &__description {
     margin: 0;
-    font-size: 14px;
-    line-height: 1.5;
+  }
+
+  &__description--details {
+    max-width: 330px;
+    margin: 0 auto;
+    font-size: vars.$mobile-subtitle-size;
+    line-height: vars.$line-height-base;
+    color: vars.$color-text-primary;
     text-align: center;
   }
 
-  &__stats {
+  &__stats--details {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-  }
-
-  &__stat {
-    display: flex;
-    justify-content: space-between;
+    gap: vars.$space-xxs;
     align-items: center;
-    gap: 12px;
-    padding: 8px 0;
-    border-bottom: 1px solid #eeeeee;
   }
 
-  &__stat-name {
-    font-size: 14px;
-    text-transform: capitalize;
+  &__stat-line {
+    margin: 0;
+    font-size: vars.$mobile-subtitle-size;
+    line-height: vars.$line-height-relaxed;
+    color: vars.$color-text-primary;
+    text-align: center;
   }
 
-  &__stat-value {
-    font-size: 14px;
-    font-weight: 600;
+  &__stat-line--total {
+    margin-top: vars.$space-xxs;
   }
 }
