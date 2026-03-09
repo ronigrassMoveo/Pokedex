@@ -1,6 +1,6 @@
 @if (variant === 'list') {
   <div class="pokemon-card pokemon-card--list">
-    <p class="pokemon-card__id">#{{ pokemon.id }}</p>
+    <p class="pokemon-card__id">{{ formattedId }}</p>
 
     <img
       class="pokemon-card__image"
@@ -14,41 +14,58 @@
 
 @if (variant === 'details') {
   <div class="pokemon-card pokemon-card--details">
-    <p class="pokemon-card__id">#{{ pokemon.id }}</p>
+    <p class="pokemon-card__id pokemon-card__id--details">{{ formattedId }}</p>
 
     <img
-      class="pokemon-card__image"
+      class="pokemon-card__image pokemon-card__image--details"
       [src]="pokemon.image"
       [alt]="pokemon.name"
     />
 
-    <h2 class="pokemon-card__name">{{ pokemon.name }}</h2>
+    <h2 class="pokemon-card__name pokemon-card__name--details">
+      {{ pokemon.name }}
+    </h2>
 
     @if ('types' in pokemon) {
-      <div class="pokemon-card__types">
+      <div class="pokemon-card__types pokemon-card__types--details">
         @for (type of pokemon.types; track type.name) {
-          <span class="pokemon-card__type">
+          <span
+            class="pokemon-card__type"
+            [class]="'pokemon-card__type ' + getTypeClass(type.name)"
+          >
             {{ type.name }}
           </span>
         }
       </div>
     }
 
+    <div class="pokemon-card__divider"></div>
+
     @if ('description' in pokemon) {
-      <p class="pokemon-card__description">
-        {{ pokemon.description }}
-      </p>
+      <section class="pokemon-card__section">
+        <h3 class="pokemon-card__section-title">Description</h3>
+        <p class="pokemon-card__description pokemon-card__description--details">
+          {{ pokemon.description }}
+        </p>
+      </section>
     }
 
     @if ('stats' in pokemon) {
-      <div class="pokemon-card__stats">
-        @for (stat of pokemon.stats; track stat.name) {
-          <div class="pokemon-card__stat">
-            <span class="pokemon-card__stat-name">{{ stat.name }}</span>
-            <span class="pokemon-card__stat-value">{{ stat.value }}</span>
-          </div>
-        }
-      </div>
+      <section class="pokemon-card__section pokemon-card__section--stats">
+        <h3 class="pokemon-card__section-title">Stats</h3>
+
+        <div class="pokemon-card__stats pokemon-card__stats--details">
+          @for (stat of pokemon.stats; track stat.name) {
+            <p class="pokemon-card__stat-line">
+              {{ stat.name }}: {{ stat.value }}
+            </p>
+          }
+
+          <p class="pokemon-card__stat-line pokemon-card__stat-line--total">
+            Total: {{ totalStats }}
+          </p>
+        </div>
+      </section>
     }
   </div>
 }
