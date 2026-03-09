@@ -1,8 +1,9 @@
-@use '../../../styles/vars' as vars;
+@use '../../../styles/_vars' as vars;
 
 .pokemon-card {
   width: 100%;
   border-radius: vars.$radius-lg;
+  padding: vars.$space-sm;
   background: vars.$color-background;
   box-shadow: vars.$shadow-card;
 
@@ -45,8 +46,11 @@
   }
 
   &__image--details {
-    width: 170px;
-    height: 170px;
+    // width: 220px;
+    // margin-bottom: vars.$space-sm;
+    // image-rendering: pixelated;
+    width: 280px;
+    height: 280px;
     margin-bottom: vars.$space-sm;
     image-rendering: pixelated;
   }
