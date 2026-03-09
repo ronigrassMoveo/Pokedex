@@ -1,1 +1,13 @@
-<p>Home page</p>
+<div class="home-page">
+  @for (pokemon of pokemons; track pokemon.id) {
+    <a
+      class="home-page__card-link"
+      [routerLink]="['/pokemon', pokemon.id]"
+    >
+      <app-pokemon-card
+        [pokemon]="pokemon"
+        variant="list"
+      />
+    </a>
+  }
+</div>

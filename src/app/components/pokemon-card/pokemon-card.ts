@@ -3,6 +3,7 @@ import { PokemonBase, PokemonDetails } from '../../models/pokemon.model';
 
 @Component({
   selector: 'app-pokemon-card',
+  standalone: true,
   imports: [],
   templateUrl: './pokemon-card.html',
   styleUrls: ['./pokemon-card.scss'],
