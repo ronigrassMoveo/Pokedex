@@ -1,1 +1,54 @@
-<p>pokemon-card works!</p>
+@if (variant === 'list') {
+  <div class="pokemon-card pokemon-card--list">
+    <p class="pokemon-card__id">#{{ pokemon.id }}</p>
+
+    <img
+      class="pokemon-card__image"
+      [src]="pokemon.image"
+      [alt]="pokemon.name"
+    />
+
+    <h3 class="pokemon-card__name">{{ pokemon.name }}</h3>
+  </div>
+}
+
+@if (variant === 'details') {
+  <div class="pokemon-card pokemon-card--details">
+    <p class="pokemon-card__id">#{{ pokemon.id }}</p>
+
+    <img
+      class="pokemon-card__image"
+      [src]="pokemon.image"
+      [alt]="pokemon.name"
+    />
+
+    <h2 class="pokemon-card__name">{{ pokemon.name }}</h2>
+
+    @if ('types' in pokemon) {
+      <div class="pokemon-card__types">
+        @for (type of pokemon.types; track type.name) {
+          <span class="pokemon-card__type">
+            {{ type.name }}
+          </span>
+        }
+      </div>
+    }
+
+    @if ('description' in pokemon) {
+      <p class="pokemon-card__description">
+        {{ pokemon.description }}
+      </p>
+    }
+
+    @if ('stats' in pokemon) {
+      <div class="pokemon-card__stats">
+        @for (stat of pokemon.stats; track stat.name) {
+          <div class="pokemon-card__stat">
+            <span class="pokemon-card__stat-name">{{ stat.name }}</span>
+            <span class="pokemon-card__stat-value">{{ stat.value }}</span>
+          </div>
+        }
+      </div>
+    }
+  </div>
+}

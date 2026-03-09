@@ -9,6 +9,5 @@ import { PokemonBase, PokemonDetails } from '../../models/pokemon.model';
 })
 export class PokemonCardComponent {
   @Input() pokemon!: PokemonBase | PokemonDetails;
-
   @Input() variant: 'list' | 'details' = 'list';
 }
