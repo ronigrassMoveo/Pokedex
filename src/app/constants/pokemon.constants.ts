@@ -20,3 +20,9 @@ export const SEARCH = {
 // Images
 export const POKEMON_IMAGE_BASE_URL =
   'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon';
+
+  // Search History
+  export const SEARCH_HISTORY = {
+  STORAGE_KEY: 'pokemon-search-history',
+  MAX_ITEMS: 5,
+};
