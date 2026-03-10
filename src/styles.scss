@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+@use './styles/vars' as vars;
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: vars.$font-family-primary;
+  background: vars.$color-background;
+}

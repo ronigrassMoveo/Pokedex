@@ -1,1 +1,84 @@
-<p>pokemon-card works!</p>
+<div
+  class="pokemon-card"
+  [class.pokemon-card--list]="variant === 'list'"
+  [class.pokemon-card--details]="variant === 'details'"
+>
+  <p
+    class="pokemon-card__id"
+    [class.pokemon-card__id--details]="variant === 'details'"
+  >
+    {{ formattedId }}
+  </p>
+
+  <img
+    class="pokemon-card__image"
+    [class.pokemon-card__image--details]="variant === 'details'"
+    [src]="pokemon.image"
+    [alt]="pokemon.name"
+  />
+
+  <h3
+    class="pokemon-card__name"
+    [class.pokemon-card__name--details]="variant === 'details'"
+  >
+    {{ pokemon.name }}
+  </h3>
+
+  @if (variant === 'details') {
+    @if ('types' in pokemon) {
+      <div
+        class="pokemon-card__types"
+        [class.pokemon-card__types--details]="true"
+      >
+        @for (type of pokemon.types; track type.name) {
+          <span
+            class="pokemon-card__type"
+            [class]="'pokemon-card__type pokemon-card__type--' + type.name.toLowerCase()"
+          >
+            {{ type.name }}
+          </span>
+        }
+      </div>
+    }
+
+    <div class="pokemon-card__divider"></div>
+
+    @if ('description' in pokemon) {
+      <div class="pokemon-card__section">
+        <h4 class="pokemon-card__section-title">Description</h4>
+        <p
+          class="pokemon-card__description"
+          [class.pokemon-card__description--details]="true"
+        >
+          {{ pokemon.description }}
+        </p>
+      </div>
+    }
+
+    @if ('stats' in pokemon) {
+      <div class="pokemon-card__section pokemon-card__section--stats">
+        <h4 class="pokemon-card__section-title">Stats</h4>
+
+        <div
+          class="pokemon-card__stats"
+          [class.pokemon-card__stats--details]="true"
+        >
+          @for (stat of pokemon.stats; track stat.name) {
+            <p class="pokemon-card__stat-line">
+              {{ stat.name }}: {{ stat.value }}
+            </p>
+          }
+
+          <p class="pokemon-card__stat-line pokemon-card__stat-line--total">
+            Total:
+            {{
+              ('stats' in pokemon)
+                ? pokemon.stats.reduce((sum, stat) => sum + stat.value, 0)
+                : 0
+            }}
+          </p>
+        </div>
+      </div>
+    }
+  }
+</div>

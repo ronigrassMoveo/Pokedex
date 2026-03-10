@@ -1,9 +1,16 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { PokemonCardComponent } from '../../components/pokemon-card/pokemon-card';
+import { MOCK_POKEMONS } from '../../mock-data/pokemons.mock';
+
 
 @Component({
   selector: 'app-home-page',
-  imports: [],
+  standalone: true,
+  imports: [PokemonCardComponent, RouterLink],
   templateUrl: './home-page.html',
-  styleUrl: './home-page.scss',
+  styleUrls: ['./home-page.scss'],
 })
-export class HomePage {}
+export class HomePage {
+    pokemons = MOCK_POKEMONS;
+}

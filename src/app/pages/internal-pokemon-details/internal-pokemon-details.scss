@@ -1,0 +1,14 @@
+@use '../../../styles/_vars' as vars;
+
+
+.internal-pokemon-details {
+  display: flex;
+  justify-content: center;
+  padding: vars.$space-sm;
+}
+
+.internal-pokemon-details app-pokemon-card {
+  display: block;
+  width: 100%;
+  max-width: 430px;
+}
