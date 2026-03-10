@@ -1,6 +1,9 @@
 <div class="internal-pokemon-details">
-  <app-pokemon-card
-    [pokemon]="pokemon"
-    [variant]="'details'"
-  ></app-pokemon-card>
+  @if (pokemon) {
+    <app-pokemon-card
+      [pokemon]="pokemon"
+      [variant]="'details'"
+    ></app-pokemon-card>
+  }
 </div>
+

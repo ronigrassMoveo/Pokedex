@@ -10,4 +10,10 @@
       />
     </a>
   }
+
+  @if (hasMore && !searchTerm) {
+    <div class="home-page__load-more">
+      <button (click)="loadMore()">Load more...</button>
+    </div>
+  }
 </div>
