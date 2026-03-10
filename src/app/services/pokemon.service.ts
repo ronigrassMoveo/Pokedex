@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { forkJoin, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { forkJoin, Observable, of } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { PokemonBase, PokemonDetails } from '../models/pokemon.model';
 import {
   POKEMON_ENDPOINTS,
@@ -61,30 +61,46 @@ export interface GetPokemonsResponse {
 export class PokemonService {
   private http = inject(HttpClient);
 
+  private pagesCache = new Map<string, GetPokemonsResponse>();
+  private searchCache = new Map<string, GetPokemonsResponse>();
+  private pokemonDetailsCache = new Map<number, PokemonDetails>();
+
   getPokemons(body: GetPokemonsRequest): Observable<GetPokemonsResponse> {
     const search = body.search?.trim().toLowerCase() ?? '';
     const page = Math.max(body.page ?? PAGINATION.FIRST_PAGE, PAGINATION.FIRST_PAGE);
     const pageSize = Math.max(body.pageSize ?? PAGINATION.DEFAULT_PAGE_SIZE, 1);
 
-    //earch by pokemon name
     if (search) {
+      const searchCacheKey = this.buildSearchCacheKey(search, pageSize);
+      const cachedSearchResult = this.searchCache.get(searchCacheKey);
+
+      if (cachedSearchResult) {
+        return of(cachedSearchResult);
+      }
+
       return this.http
         .get<PokemonResponse>(`${POKEMON_ENDPOINTS.pokemon}/${search}`)
         .pipe(
           map((pokemon) => {
-            const item = this.mapToPokemonBase(pokemon.name, pokemon.id);
-
-            return {
-              items: [item],
+            const response: GetPokemonsResponse = {
+              items: [this.mapToPokemonBase(pokemon.name, pokemon.id)],
               total: 1,
               page: PAGINATION.FIRST_PAGE,
               pageSize,
             };
+
+            this.searchCache.set(searchCacheKey, response);
+            return response;
           })
         );
     }
 
-    //paging
+    const pageCacheKey = this.buildPageCacheKey(page, pageSize);
+    const cachedPage = this.pagesCache.get(pageCacheKey);
+
+    if (cachedPage) {
+      return of(cachedPage);
+    }
 
     const offset = (page - 1) * pageSize;
 
@@ -101,11 +117,20 @@ export class PokemonService {
           total: response.count,
           page,
           pageSize,
-        }))
+        })),
+        tap((response) => {
+          this.pagesCache.set(pageCacheKey, response);
+        })
       );
   }
 
   getPokemonDetails(id: number): Observable<PokemonDetails> {
+    const cachedPokemonDetails = this.pokemonDetailsCache.get(id);
+
+    if (cachedPokemonDetails) {
+      return of(cachedPokemonDetails);
+    }
+
     return forkJoin({
       pokemon: this.http.get<PokemonResponse>(
         `${POKEMON_ENDPOINTS.pokemon}/${id}`
@@ -128,8 +153,19 @@ export class PokemonService {
             value: statItem.base_stat,
           })),
         };
+      }),
+      tap((pokemonDetails) => {
+        this.pokemonDetailsCache.set(id, pokemonDetails);
       })
     );
+  }
+
+  private buildPageCacheKey(page: number, pageSize: number): string {
+    return `page=${page}&pageSize=${pageSize}`;
+  }
+
+  private buildSearchCacheKey(search: string, pageSize: number): string {
+    return `search=${search}&pageSize=${pageSize}`;
   }
 
   private mapToPokemonBase(name: string, id: number): PokemonBase {
