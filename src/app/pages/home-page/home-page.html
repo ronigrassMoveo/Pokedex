@@ -1,89 +1,3 @@
-<<<<<<< Updated upstream
-<div class="home-page">
-=======
-  <!-- <div class="home-page">
-  <div class="home-page__search-section" #searchContainer>
-    <div class="home-page__search-row">
-      <input
-        class="home-page__search-input"
-        type="text"
-        [(ngModel)]="searchInput"
-        (focus)="showSearchHistory = true"
-        (ngModelChange)="onSearchInputChange()"
-      />
-
-      <button
-        class="home-page__search-button"
-        type="button"
-        (click)="onSearch()"
-      >
-        Search
-      </button>
-    </div>
-
-    @if (showSearchHistory && searchHistory.length > 0) {
-      <div class="home-page__search-history-dropdown">
-        <div class="home-page__search-history-header">
-          <span class="home-page__search-history-title">RECENT SEARCHES</span>
-
-          <button
-            type="button"
-            class="home-page__search-history-clear"
-            (click)="clearSearchHistory()"
-          >
-            CLEAR
-          </button>
-        </div>
-
-        @for (item of searchHistory; track item) {
-          <div class="home-page__search-history-item">
-            <button
-              type="button"
-              class="home-page__search-history-text"
-              (click)="selectHistoryItem(item)"
-            >
-              {{ item }}
-            </button>
-
-            <button
-              type="button"
-              class="home-page__search-history-remove"
-              (click)="removeHistoryItem(item)"
-            >
-              ✕
-            </button>
-          </div>
-        }
-      </div>
-    }
-  </div>
-
-  @if (pokemonNotFound) {
-    <div class="home-page__not-found">
-      Pokemon not found
-    </div>
-  }
-
->>>>>>> Stashed changes
-  @for (pokemon of pokemons; track pokemon.id) {
-    <a
-      class="home-page__card-link"
-      [routerLink]="['/pokemon', pokemon.id]"
-    >
-      <app-pokemon-card
-        [pokemon]="pokemon"
-        variant="list"
-      />
-    </a>
-  }
-
-  @if (hasMore && !searchTerm) {
-    <div class="home-page__load-more">
-      <button (click)="loadMore()">Load more...</button>
-    </div>
-  }
-</div> -->
-
 <div class="home-page">
   <div class="home-page__search-section" #searchContainer>
     <div class="home-page__search-row">
@@ -108,8 +22,28 @@
         class="home-page__filter-button"
         type="button"
         (click)="openFilters()"
+        aria-label="Open filters"
       >
-        Filters
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="22"
+          height="22"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="4" y1="6" x2="20" y2="6"></line>
+          <circle cx="10" cy="6" r="2"></circle>
+
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <circle cx="14" cy="12" r="2"></circle>
+
+          <line x1="4" y1="18" x2="20" y2="18"></line>
+          <circle cx="8" cy="18" r="2"></circle>
+        </svg>
       </button>
     </div>
 

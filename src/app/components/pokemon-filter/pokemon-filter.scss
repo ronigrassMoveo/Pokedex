@@ -3,10 +3,10 @@
 .pokemon-filter {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 24px;
+  gap: vars.$space-md;
+  padding: vars.$space-lg;
   background: vars.$color-white;
-  border-radius: 20px;
+  border-radius: vars.$space-md;
   min-width: 320px;
   max-width: 420px;
   width: 100%;
@@ -16,46 +16,46 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    gap: vars.$space-sm;
   }
 
   &__title {
     margin: 0;
-    font-size: 24px;
-    font-weight: 700;
+    font-size: vars.$mobile-subtitle-size;
+    font-weight: vars.$font-weight-semibold;
     color: vars.$color-header;
   }
 
   &__close-button {
     border: none;
     background: transparent;
-    font-size: 20px;
+    font-size: vars.$mobile-subtitle-size;
     line-height: 1;
     cursor: pointer;
     color: vars.$color-header;
-    padding: 4px;
+    padding: vars.$space-xxs;
   }
 
   &__section {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: vars.$space-xs;
   }
 
   &__label {
     margin: 0;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: vars.$mobile-text-small;
+    font-weight: vars.$font-weight-semibold;
     color: vars.$color-text-primary;
   }
 
   &__select {
     width: 100%;
     height: 44px;
-    border: 1px solid #d9d9e3;
-    border-radius: 12px;
-    padding: 0 12px;
-    font-size: 14px;
+    border: 1px solid vars.$color-lavenderMist;
+    border-radius: vars.$radius-md;
+    padding: 0 vars.$space-sm;
+    font-size: vars.$mobile-text-small;
     background: vars.$color-white;
     color: vars.$color-header;
     outline: none;
@@ -68,18 +68,18 @@
   &__colors {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
+    gap: vars.$space-xs;
   }
 
   &__color-button {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: vars.$space-xs;
     width: 100%;
     min-height: 44px;
-    padding: 10px 12px;
-    border: 1px solid #d9d9e3;
-    border-radius: 14px;
+    padding: vars.$space-xs vars.$space-sm;
+    border: 1px solid vars.$color-lavenderMist;
+    border-radius: vars.$radius-md;
     background: vars.$color-white;
     cursor: pointer;
     transition: border-color 0.2s ease, transform 0.2s ease;
@@ -103,67 +103,67 @@
     border: 1px solid rgba(0, 0, 0, 0.12);
 
     &--black {
-      background: #2f2f2f;
+      background: vars.$color-black;
     }
 
     &--blue {
-      background: #4f80ff;
+      background: vars.$color-blue;
     }
 
     &--brown {
-      background: #9b6b43;
+      background: vars.$color-brown;
     }
 
     &--gray {
-      background: #9aa0a6;
+      background: vars.$color-gray;
     }
 
     &--green {
-      background: #62b15a;
+      background: vars.$color-green;
     }
 
     &--pink {
-      background: #f38bb9;
+      background: vars.$color-pink;
     }
 
     &--purple {
-      background: #8a63d2;
+      background: vars.$color-purple;
     }
 
     &--red {
-      background: #eb5757;
+      background: vars.$color-red;
     }
 
     &--white {
-      background: #ffffff;
-      border: 1px solid #cfcfcf;
+      background: vars.$color-white;
+      border: 1px solid vars.$color-americanSilver;
     }
 
     &--yellow {
-      background: #f2c94c;
+      background: vars.$color-yellow;
     }
   }
 
   &__color-name {
-    font-size: 14px;
-    font-weight: 500;
+    font-size: vars.$mobile-text-small;
+    font-weight: vars.$font-weight-regular;
     color: vars.$color-header;
   }
 
   &__actions {
     display: flex;
     justify-content: flex-end;
-    gap: 12px;
-    margin-top: 4px;
+    gap: vars.$space-sm;
+    margin-top: vars.$space-xxs;
   }
 
   &__action-button {
     min-width: 96px;
     height: 42px;
-    border-radius: 12px;
+    border-radius: vars.$radius-sm;
     border: none;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: vars.$mobile-text-small;
+    font-weight: vars.$font-weight-semibold;
     cursor: pointer;
     transition: transform 0.2s ease, opacity 0.2s ease;
 
@@ -173,7 +173,7 @@
     }
 
     &--secondary {
-      background: #f1f2f6;
+      background: vars.$color-americanSilver;
       color: vars.$color-header;
     }
 

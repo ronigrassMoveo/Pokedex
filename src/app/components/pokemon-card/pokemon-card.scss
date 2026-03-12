@@ -46,9 +46,6 @@
   }
 
   &__image--details {
-    // width: 220px;
-    // margin-bottom: vars.$space-sm;
-    // image-rendering: pixelated;
     width: 280px;
     height: 280px;
     margin-bottom: vars.$space-sm;
@@ -172,7 +169,7 @@
 
   &__divider {
     width: 100%;
-    border-top: 1px solid #d3d3d3;
+    border-top: 1px solid vars.$color-lightGray;
     margin-bottom: vars.$space-lg;
   }
 

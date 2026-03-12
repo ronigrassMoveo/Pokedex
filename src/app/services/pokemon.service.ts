@@ -1,7 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { forkJoin, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { forkJoin, Observable, of } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { PokemonBase, PokemonDetails } from '../models/pokemon.model';
 import {
   POKEMON_ENDPOINTS,
@@ -112,8 +112,6 @@ interface NormalizedGetPokemonsRequest {
 export class PokemonService {
   private http = inject(HttpClient);
 
-<<<<<<< Updated upstream
-=======
   private pagesCache = new Map<string, GetPokemonsResponse>();
   private searchCache = new Map<string, GetPokemonsResponse>();
   private filteredCache = new Map<string, GetPokemonsResponse>();
@@ -126,49 +124,9 @@ export class PokemonService {
   private readonly colorEndpoint = 'https://pokeapi.co/api/v2/pokemon-color';
   private readonly generationEndpoint = 'https://pokeapi.co/api/v2/generation';
 
->>>>>>> Stashed changes
   getPokemons(body: GetPokemonsRequest): Observable<GetPokemonsResponse> {
     const request = this.normalizeRequest(body);
 
-<<<<<<< Updated upstream
-    //earch by pokemon name
-    if (search) {
-      return this.http
-        .get<PokemonResponse>(`${POKEMON_ENDPOINTS.pokemon}/${search}`)
-        .pipe(
-          map((pokemon) => {
-            const item = this.mapToPokemonBase(pokemon.name, pokemon.id);
-
-            return {
-              items: [item],
-              total: 1,
-              page: PAGINATION.FIRST_PAGE,
-              pageSize,
-            };
-          })
-        );
-    }
-
-    //paging
-
-    const offset = (page - 1) * pageSize;
-
-    return this.http
-      .get<PokemonListResponse>(
-        `${POKEMON_ENDPOINTS.pokemon}?limit=${pageSize}&offset=${offset}`
-      )
-      .pipe(
-        map((response) => ({
-          items: response.results.map((pokemon) => {
-            const id = this.extractId(pokemon.url);
-            return this.mapToPokemonBase(pokemon.name, id);
-          }),
-          total: response.count,
-          page,
-          pageSize,
-        }))
-      );
-=======
     if (request.search) {
       return this.getSearchPokemons(request);
     }
@@ -178,10 +136,15 @@ export class PokemonService {
     }
 
     return this.getPaginatedPokemons(request);
->>>>>>> Stashed changes
   }
 
   getPokemonDetails(id: number): Observable<PokemonDetails> {
+    const cachedPokemonDetails = this.pokemonDetailsCache.get(id);
+
+    if (cachedPokemonDetails) {
+      return of(cachedPokemonDetails);
+    }
+
     return forkJoin({
       pokemon: this.http.get<PokemonResponse>(
         `${POKEMON_ENDPOINTS.pokemon}/${id}`
@@ -204,12 +167,13 @@ export class PokemonService {
             value: statItem.base_stat,
           })),
         };
+      }),
+      tap((pokemonDetails) => {
+        this.pokemonDetailsCache.set(id, pokemonDetails);
       })
     );
   }
 
-<<<<<<< Updated upstream
-=======
   private normalizeRequest(body: GetPokemonsRequest): NormalizedGetPokemonsRequest {
     return {
       search: body.search?.trim().toLowerCase() ?? '',
@@ -498,7 +462,6 @@ export class PokemonService {
     return JSON.stringify(request);
   }
 
->>>>>>> Stashed changes
   private mapToPokemonBase(name: string, id: number): PokemonBase {
     return {
       id,
