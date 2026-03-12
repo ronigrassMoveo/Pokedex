@@ -1,10 +1,12 @@
-import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject , ElementRef, HostListener, ViewChild,} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { PokemonCardComponent } from '../../components/pokemon-card/pokemon-card';
 import { PokemonService } from '../../services/pokemon.service';
 import { PokemonBase } from '../../models/pokemon.model';
 import { PAGINATION, SEARCH } from '../../constants/pokemon.constants';
+import { SearchHistoryService } from '../../services/search-history.service';
+import { SEARCH_HISTORY } from '../../constants/pokemon.constants';
 
 @Component({
   selector: 'app-home-page',
@@ -16,7 +18,7 @@ import { PAGINATION, SEARCH } from '../../constants/pokemon.constants';
 export class HomePage implements OnInit {
   private pokemonService = inject(PokemonService);
   private cdr = inject(ChangeDetectorRef);
-
+  private searchHistoryService = inject(SearchHistoryService);
   pokemons: PokemonBase[] = [];
 
   currentPage = PAGINATION.FIRST_PAGE;
@@ -27,8 +29,12 @@ export class HomePage implements OnInit {
   searchInput = SEARCH.EMPTY_QUERY;
 
   pokemonNotFound = false;
+  searchHistory: string[] = [];
+  showSearchHistory = false;
+  @ViewChild('searchContainer') searchContainer?: ElementRef<HTMLElement>;
 
   ngOnInit(): void {
+    this.searchHistory = this.searchHistoryService.getHistory();
     this.loadPokemons(true);
   }
 
@@ -59,13 +65,23 @@ export class HomePage implements OnInit {
         this.cdr.detectChanges();
       },
     });
-}
+  }
+
+  // onSearch(): void {
+  //   this.searchTerm = this.searchInput.trim().toLowerCase();
+  //   this.currentPage = PAGINATION.FIRST_PAGE;
+  //   this.pokemonNotFound = false;
+  //   this.loadPokemons(true);
+  // }
 
   onSearch(): void {
-    this.searchTerm = this.searchInput.trim().toLowerCase();
-    this.currentPage = PAGINATION.FIRST_PAGE;
-    this.pokemonNotFound = false;
-    this.loadPokemons(true);
+  this.searchTerm = this.searchInput.trim().toLowerCase();
+  this.currentPage = PAGINATION.FIRST_PAGE;
+  this.pokemonNotFound = false;
+  if (this.searchTerm) {
+    this.searchHistory = this.searchHistoryService.saveSearch(this.searchTerm);
+  }
+  this.loadPokemons(true);
   }
 
   clearSearch(): void {
@@ -79,11 +95,46 @@ export class HomePage implements OnInit {
   if (this.searchInput.trim() !== '') {
     return;
   }
-
   this.searchTerm = SEARCH.EMPTY_QUERY;
   this.currentPage = PAGINATION.FIRST_PAGE;
   this.pokemonNotFound = false;
   this.loadPokemons(true);
+  }
+
+  selectHistoryItem(term: string): void {
+    this.searchInput = term;
+    this.onSearch();
+    this.showSearchHistory = false;
+  }
+
+  removeHistoryItem(term: string): void {
+    this.searchHistory = this.searchHistory.filter(
+      (item) => item !== term
+    );
+    localStorage.setItem(
+      SEARCH_HISTORY.STORAGE_KEY,
+      JSON.stringify(this.searchHistory)
+    );
+  }
+
+  clearSearchHistory(): void {
+  this.searchHistory = [];
+  localStorage.removeItem(SEARCH_HISTORY.STORAGE_KEY);
+  this.showSearchHistory = false;
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+  const target = event.target as Node | null;
+  const container = this.searchContainer?.nativeElement;
+
+  if (!container || !target) {
+    return;
+  }
+
+  if (!container.contains(target)) {
+    this.showSearchHistory = false;
+  }
 }
 
   loadMore(): void {
