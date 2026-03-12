@@ -1,4 +1,70 @@
+<<<<<<< Updated upstream
 <div class="home-page">
+=======
+  <!-- <div class="home-page">
+  <div class="home-page__search-section" #searchContainer>
+    <div class="home-page__search-row">
+      <input
+        class="home-page__search-input"
+        type="text"
+        [(ngModel)]="searchInput"
+        (focus)="showSearchHistory = true"
+        (ngModelChange)="onSearchInputChange()"
+      />
+
+      <button
+        class="home-page__search-button"
+        type="button"
+        (click)="onSearch()"
+      >
+        Search
+      </button>
+    </div>
+
+    @if (showSearchHistory && searchHistory.length > 0) {
+      <div class="home-page__search-history-dropdown">
+        <div class="home-page__search-history-header">
+          <span class="home-page__search-history-title">RECENT SEARCHES</span>
+
+          <button
+            type="button"
+            class="home-page__search-history-clear"
+            (click)="clearSearchHistory()"
+          >
+            CLEAR
+          </button>
+        </div>
+
+        @for (item of searchHistory; track item) {
+          <div class="home-page__search-history-item">
+            <button
+              type="button"
+              class="home-page__search-history-text"
+              (click)="selectHistoryItem(item)"
+            >
+              {{ item }}
+            </button>
+
+            <button
+              type="button"
+              class="home-page__search-history-remove"
+              (click)="removeHistoryItem(item)"
+            >
+              ✕
+            </button>
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  @if (pokemonNotFound) {
+    <div class="home-page__not-found">
+      Pokemon not found
+    </div>
+  }
+
+>>>>>>> Stashed changes
   @for (pokemon of pokemons; track pokemon.id) {
     <a
       class="home-page__card-link"
@@ -14,6 +80,116 @@
   @if (hasMore && !searchTerm) {
     <div class="home-page__load-more">
       <button (click)="loadMore()">Load more...</button>
+    </div>
+  }
+</div> -->
+
+<div class="home-page">
+  <div class="home-page__search-section" #searchContainer>
+    <div class="home-page__search-row">
+      <input
+        class="home-page__search-input"
+        type="text"
+        [(ngModel)]="searchInput"
+        (focus)="showSearchHistory = true"
+        (ngModelChange)="onSearchInputChange()"
+        placeholder="Search Pokémon"
+      />
+
+      <button
+        class="home-page__search-button"
+        type="button"
+        (click)="onSearch()"
+      >
+        Search
+      </button>
+
+      <button
+        class="home-page__filter-button"
+        type="button"
+        (click)="openFilters()"
+      >
+        Filters
+      </button>
+    </div>
+
+    @if (showSearchHistory && searchHistory.length > 0) {
+      <div class="home-page__search-history-dropdown">
+        <div class="home-page__search-history-header">
+          <span class="home-page__search-history-title">RECENT SEARCHES</span>
+
+          <button
+            type="button"
+            class="home-page__search-history-clear"
+            (click)="clearSearchHistory()"
+          >
+            CLEAR
+          </button>
+        </div>
+
+        @for (item of searchHistory; track item) {
+          <div class="home-page__search-history-item">
+            <button
+              type="button"
+              class="home-page__search-history-text"
+              (click)="selectHistoryItem(item)"
+            >
+              {{ item }}
+            </button>
+
+            <button
+              type="button"
+              class="home-page__search-history-remove"
+              (click)="removeHistoryItem(item)"
+            >
+              ✕
+            </button>
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  @if (isFilterOpen) {
+    <div
+      class="home-page__filter-overlay"
+      (click)="closeFilters()"
+    >
+      <div
+        class="home-page__filter-modal"
+        (click)="$event.stopPropagation()"
+      >
+        <app-pokemon-filter
+          [filters]="filters"
+          (apply)="applyFilters($event)"
+          (clear)="clearFilters()"
+          (close)="closeFilters()"
+        />
+      </div>
+    </div>
+  }
+
+  @if (pokemonNotFound) {
+    <div class="home-page__not-found">
+      Pokemon not found
+    </div>
+  }
+
+  @for (pokemon of pokemons; track pokemon.id) {
+    <a
+      class="home-page__card-link"
+      [routerLink]="['/pokemon', pokemon.id]"
+    >
+      <app-pokemon-card
+        [pokemon]="pokemon"
+        variant="list"
+      />
+    </a>
+  }
+
+  @if (hasMore && !searchTerm) {
+    <div class="home-page__load-more">
+      <button type="button" (click)="loadMore()">Load more...</button>
     </div>
   }
 </div>

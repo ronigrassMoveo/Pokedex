@@ -1,0 +1,136 @@
+<div class="pokemon-filter">
+  <div class="pokemon-filter__header">
+    <h2 class="pokemon-filter__title">Filters</h2>
+
+    <button
+      type="button"
+      class="pokemon-filter__close-button"
+      (click)="onClose()"
+      aria-label="Close filters"
+    >
+      ✕
+    </button>
+  </div>
+
+  <div class="pokemon-filter__section">
+    <label class="pokemon-filter__label" for="type">Type</label>
+
+    <select
+      id="type"
+      class="pokemon-filter__select"
+      [(ngModel)]="draftFilters.type"
+    >
+      <option [ngValue]="null">All</option>
+      <option value="normal">Normal</option>
+      <option value="fire">Fire</option>
+      <option value="water">Water</option>
+      <option value="electric">Electric</option>
+      <option value="grass">Grass</option>
+      <option value="ice">Ice</option>
+      <option value="fighting">Fighting</option>
+      <option value="poison">Poison</option>
+      <option value="ground">Ground</option>
+      <option value="flying">Flying</option>
+      <option value="psychic">Psychic</option>
+      <option value="bug">Bug</option>
+      <option value="rock">Rock</option>
+      <option value="ghost">Ghost</option>
+      <option value="dragon">Dragon</option>
+      <option value="dark">Dark</option>
+      <option value="steel">Steel</option>
+      <option value="fairy">Fairy</option>
+    </select>
+  </div>
+
+  <div class="pokemon-filter__section">
+    <label class="pokemon-filter__label" for="ability">Ability</label>
+
+    <select
+      id="ability"
+      class="pokemon-filter__select"
+      [(ngModel)]="draftFilters.ability"
+    >
+      <option [ngValue]="null">All</option>
+      <option value="overgrow">Overgrow</option>
+      <option value="blaze">Blaze</option>
+      <option value="torrent">Torrent</option>
+      <option value="shield-dust">Shield Dust</option>
+      <option value="shed-skin">Shed Skin</option>
+      <option value="compound-eyes">Compound Eyes</option>
+      <option value="swarm">Swarm</option>
+      <option value="keen-eye">Keen Eye</option>
+      <option value="tangled-feet">Tangled Feet</option>
+      <option value="big-pecks">Big Pecks</option>
+      <option value="run-away">Run Away</option>
+      <option value="guts">Guts</option>
+      <option value="intimidate">Intimidate</option>
+      <option value="static">Static</option>
+      <option value="sand-veil">Sand Veil</option>
+      <option value="poison-point">Poison Point</option>
+      <option value="cute-charm">Cute Charm</option>
+      <option value="flash-fire">Flash Fire</option>
+      <option value="levitate">Levitate</option>
+    </select>
+  </div>
+
+ <div class="pokemon-filter__section">
+  <label class="pokemon-filter__label" for="generation">Generation</label>
+
+  <select
+    id="generation"
+    class="pokemon-filter__select"
+    [(ngModel)]="draftFilters.generation"
+  >
+    <option [ngValue]="null">All</option>
+
+    @for (generation of generations; track generation) {
+      <option [ngValue]="generation">
+        {{ generationLabels[generation] }}
+      </option>
+    }
+   </select>
+ </div>
+
+  <div class="pokemon-filter__section">
+    <p class="pokemon-filter__label">Color</p>
+
+    <div class="pokemon-filter__colors">
+      @for (color of colors; track color) {
+        <button
+          type="button"
+          class="pokemon-filter__color-button"
+          [class.pokemon-filter__color-button--selected]="draftFilters.color === color"
+          [attr.aria-label]="colorLabels[color]"
+          (click)="onSelectColor(color)"
+        >
+          <span
+            class="pokemon-filter__color-swatch"
+            [class]="'pokemon-filter__color-swatch--' + color"
+          ></span>
+
+          <span class="pokemon-filter__color-name">
+            {{ colorLabels[color] }}
+          </span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="pokemon-filter__actions">
+    <button
+      type="button"
+      class="pokemon-filter__action-button pokemon-filter__action-button--secondary"
+      (click)="onClear()"
+    >
+      Clear
+    </button>
+
+    <button
+      type="button"
+      class="pokemon-filter__action-button pokemon-filter__action-button--primary"
+      (click)="onApply()"
+    >
+      Apply
+    </button>
+  </div>
+</div>
