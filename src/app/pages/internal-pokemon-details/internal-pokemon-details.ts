@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
 import { PokemonCardComponent } from '../../components/pokemon-card/pokemon-card';
 import { PokemonDetails } from '../../models/pokemon.model';
-import { MOCK_POKEMON_DETAILS } from '../../mock-data/pokemons.mock';
-
+import { PokemonService } from '../../services/pokemon.service';
 
 @Component({
   selector: 'app-internal-pokemon-details',
@@ -12,12 +12,24 @@ import { MOCK_POKEMON_DETAILS } from '../../mock-data/pokemons.mock';
   templateUrl: './internal-pokemon-details.html',
   styleUrls: ['./internal-pokemon-details.scss'],
 })
+export class InternalPokemonDetails implements OnInit {
+  private route = inject(ActivatedRoute);
+  private pokemonService = inject(PokemonService);
+  private cdr = inject(ChangeDetectorRef);
 
-export class InternalPokemonDetails {
-  pokemon: PokemonDetails = MOCK_POKEMON_DETAILS[1];
+  pokemon?: PokemonDetails;
 
-  constructor(private route: ActivatedRoute) {
+  ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.pokemon = MOCK_POKEMON_DETAILS[id] ?? MOCK_POKEMON_DETAILS[1];
+
+    this.pokemonService.getPokemonDetails(id).subscribe({
+      next: (pokemonDetails) => {
+        this.pokemon = pokemonDetails;
+        this.cdr.detectChanges();
+      },
+      error: (error) => {
+        console.error('pokemon details load error:', error);
+      },
+    });
   }
 }

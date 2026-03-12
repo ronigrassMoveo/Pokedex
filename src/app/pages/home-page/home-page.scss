@@ -12,3 +12,27 @@
   text-decoration: none;
   color: inherit;
 }
+
+.home-page__load-more {
+  display: flex;
+  justify-content: center;
+  margin: vars.$space-2xl 0;
+}
+
+.home-page__load-more button {
+  font-family: vars.$font-family-primary;
+  font-size: vars.$mobile-text-size;
+  font-weight: vars.$font-weight-regular;
+
+  padding: vars.$space-xs vars.$space-xl;
+
+  border: vars.$radius-xs solid vars.$color-text-primary;
+  border-radius: 10px;
+
+  background-color: transparent;
+  color: vars.$color-text-primary;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
