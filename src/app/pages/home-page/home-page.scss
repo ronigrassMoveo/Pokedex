@@ -1,5 +1,40 @@
 @use '../../../styles/_vars' as vars;
 
+.home-page__search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: vars.$space-xs;
+  margin: vars.$space-2xl 0;
+}
+
+.home-page__search-input {
+  width: 330px;
+  height: 40px;
+  padding: 0 vars.$space-sm;
+  border: vars.$radius-xs solid vars.$color-text-primary;
+  border-radius: vars.$radius-sm;
+  font-size: vars.$mobile-text-size;
+  outline: none;
+}
+
+.home-page__search-button {
+  height: 40px;
+  padding: 0 vars.$space-md;
+  border: none;
+  border-radius: vars.$radius-sm;
+  background-color: vars.$color-text-primary;
+  color: vars.$color-white;
+  font-size: vars.$mobile-text-size;
+  cursor: pointer;
+}
+
+.home-page__not-found {
+  text-align: center;
+  margin-top: vars.$space-lg;
+  font-size: vars.$mobile-text-size;
+  color: vars.$color-text-primary;
+}
 
 .home-page {
   display: flex;
@@ -23,16 +58,11 @@
   font-family: vars.$font-family-primary;
   font-size: vars.$mobile-text-size;
   font-weight: vars.$font-weight-regular;
-
   padding: vars.$space-xs vars.$space-xl;
-
   border: vars.$radius-xs solid vars.$color-text-primary;
   border-radius: 10px;
-
   background-color: transparent;
   color: vars.$color-text-primary;
-
   cursor: pointer;
-
   transition: 0.2s ease;
 }

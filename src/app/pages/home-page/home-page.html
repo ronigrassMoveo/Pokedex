@@ -1,4 +1,27 @@
 <div class="home-page">
+  <div class="home-page__search">
+    <input
+      class="home-page__search-input"
+      type="text"
+      [(ngModel)]="searchInput"
+      (ngModelChange)="onSearchInputChange()"
+    />
+
+    <button
+      class="home-page__search-button"
+      type="button"
+      (click)="onSearch()"
+    >
+      Search
+    </button>
+  </div>
+
+  @if (pokemonNotFound) {
+  <div class="home-page__not-found">
+    Pokemon not found
+  </div>
+}
+
   @for (pokemon of pokemons; track pokemon.id) {
     <a
       class="home-page__card-link"
