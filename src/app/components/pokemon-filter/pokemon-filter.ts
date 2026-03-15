@@ -10,10 +10,15 @@ import { FormsModule } from '@angular/forms';
 
 import {
   DEFAULT_POKEMON_FILTERS,
-  POKEMON_GENERATIONS,
-  POKEMON_GENERATION_LABELS,
+  POKEMON_ABILITIES,
+  POKEMON_ABILITY_LABELS,
   POKEMON_COLORS,
   POKEMON_COLOR_LABELS,
+  POKEMON_FILTER_TEXT,
+  POKEMON_GENERATIONS,
+  POKEMON_GENERATION_LABELS,
+  POKEMON_TYPES,
+  POKEMON_TYPE_LABELS,
 } from '../../constants/pokemon-filter.constants';
 
 import {
@@ -36,6 +41,14 @@ export class PokemonFilterComponent implements OnChanges {
   @Output() close = new EventEmitter<void>();
 
   draftFilters: PokemonFilters = { ...DEFAULT_POKEMON_FILTERS };
+
+  readonly text = POKEMON_FILTER_TEXT;
+
+  readonly types = POKEMON_TYPES;
+  readonly typeLabels = POKEMON_TYPE_LABELS;
+
+  readonly abilities = POKEMON_ABILITIES;
+  readonly abilityLabels = POKEMON_ABILITY_LABELS;
 
   readonly generations = POKEMON_GENERATIONS;
   readonly generationLabels = POKEMON_GENERATION_LABELS;

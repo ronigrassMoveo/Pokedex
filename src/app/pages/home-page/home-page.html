@@ -7,7 +7,7 @@
         [(ngModel)]="searchInput"
         (focus)="showSearchHistory = true"
         (ngModelChange)="onSearchInputChange()"
-        placeholder="Search Pokémon"
+        [placeholder]="text.SEARCH_PLACEHOLDER"
       />
 
       <button
@@ -15,19 +15,19 @@
         type="button"
         (click)="onSearch()"
       >
-        Search
+        {{ text.SEARCH_BUTTON }}
       </button>
 
       <button
         class="home-page__filter-button"
         type="button"
         (click)="openFilters()"
-        aria-label="Open filters"
+        [attr.aria-label]="text.FILTER_ARIA_LABEL"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="22"
-          height="22"
+          [attr.width]="iconSizes.FILTER"
+          [attr.height]="iconSizes.FILTER"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -50,14 +50,14 @@
     @if (showSearchHistory && searchHistory.length > 0) {
       <div class="home-page__search-history-dropdown">
         <div class="home-page__search-history-header">
-          <span class="home-page__search-history-title">RECENT SEARCHES</span>
+          <span class="home-page__search-history-title">{{ historyText.TITLE }}</span>
 
           <button
             type="button"
             class="home-page__search-history-clear"
             (click)="clearSearchHistory()"
           >
-            CLEAR
+            {{ historyText.CLEAR_BUTTON }}
           </button>
         </div>
 
@@ -76,7 +76,7 @@
               class="home-page__search-history-remove"
               (click)="removeHistoryItem(item)"
             >
-              ✕
+              {{ historyText.REMOVE_BUTTON }}
             </button>
           </div>
         }
@@ -105,7 +105,7 @@
 
   @if (pokemonNotFound) {
     <div class="home-page__not-found">
-      Pokemon not found
+      {{ text.NOT_FOUND_MESSAGE }}
     </div>
   }
 
@@ -123,7 +123,7 @@
 
   @if (hasMore && !searchTerm) {
     <div class="home-page__load-more">
-      <button type="button" (click)="loadMore()">Load more...</button>
+      <button type="button" (click)="loadMore()">{{ text.LOAD_MORE }}</button>
     </div>
   }
 </div>

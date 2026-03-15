@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { PokemonBase, PokemonDetails } from '../../models/pokemon.model';
+import { POKEMON_CARD_TEXT } from '../../constants/pokemon.constants';
 
 @Component({
   selector: 'app-pokemon-card',
@@ -11,6 +12,8 @@ import { PokemonBase, PokemonDetails } from '../../models/pokemon.model';
 export class PokemonCardComponent {
   @Input() pokemon!: PokemonBase | PokemonDetails;
   @Input() variant: 'list' | 'details' = 'list';
+
+  readonly text = POKEMON_CARD_TEXT;
 
   get formattedId(): string {
     return `#${this.pokemon.id.toString().padStart(3, '0')}`;

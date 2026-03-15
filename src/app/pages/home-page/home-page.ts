@@ -20,9 +20,11 @@ import { PokemonBase } from '../../models/pokemon.model';
 import { PokemonFilters } from '../../models/pokemon-filters.model';
 
 import {
+  HOME_PAGE_TEXT,
   PAGINATION,
   SEARCH,
-  SEARCH_HISTORY,
+  SEARCH_HISTORY_TEXT,
+  ICON_SIZES
 } from '../../constants/pokemon.constants';
 import { DEFAULT_POKEMON_FILTERS } from '../../constants/pokemon-filter.constants';
 
@@ -42,6 +44,10 @@ export class HomePage implements OnInit {
   private pokemonService = inject(PokemonService);
   private cdr = inject(ChangeDetectorRef);
   private searchHistoryService = inject(SearchHistoryService);
+
+  readonly text = HOME_PAGE_TEXT;
+  readonly historyText = SEARCH_HISTORY_TEXT;
+  readonly iconSizes = ICON_SIZES;
 
   pokemons: PokemonBase[] = [];
 
@@ -134,14 +140,14 @@ export class HomePage implements OnInit {
   removeHistoryItem(term: string): void {
     this.searchHistory = this.searchHistory.filter((item) => item !== term);
     localStorage.setItem(
-      SEARCH_HISTORY.STORAGE_KEY,
+      SEARCH_HISTORY_TEXT.STORAGE_KEY,
       JSON.stringify(this.searchHistory)
     );
   }
 
   clearSearchHistory(): void {
     this.searchHistory = [];
-    localStorage.removeItem(SEARCH_HISTORY.STORAGE_KEY);
+    localStorage.removeItem(SEARCH_HISTORY_TEXT.STORAGE_KEY);
     this.showSearchHistory = false;
   }
 
