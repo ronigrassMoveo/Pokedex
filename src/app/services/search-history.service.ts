@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SEARCH_HISTORY } from '../constants/pokemon.constants';
+import { SEARCH_HISTORY_TEXT } from '../constants/pokemon.constants';
 
 @Injectable({
   providedIn: 'root',
@@ -7,7 +7,7 @@ import { SEARCH_HISTORY } from '../constants/pokemon.constants';
 export class SearchHistoryService {
 
   getHistory(): string[] {
-    const rawHistory = localStorage.getItem(SEARCH_HISTORY.STORAGE_KEY);
+    const rawHistory = localStorage.getItem(SEARCH_HISTORY_TEXT.STORAGE_KEY);
 
     if (!rawHistory) {
       return [];
@@ -33,10 +33,10 @@ export class SearchHistoryService {
     const updatedHistory = [
       normalizedTerm,
       ...currentHistory.filter((item) => item !== normalizedTerm),
-    ].slice(0, SEARCH_HISTORY.MAX_ITEMS);
+    ].slice(0, SEARCH_HISTORY_TEXT.MAX_ITEMS);
 
     localStorage.setItem(
-      SEARCH_HISTORY.STORAGE_KEY,
+      SEARCH_HISTORY_TEXT.STORAGE_KEY,
       JSON.stringify(updatedHistory)
     );
 
@@ -44,6 +44,6 @@ export class SearchHistoryService {
   }
 
   clearHistory(): void {
-    localStorage.removeItem(SEARCH_HISTORY.STORAGE_KEY);
+    localStorage.removeItem(SEARCH_HISTORY_TEXT.STORAGE_KEY);
   }
 }
