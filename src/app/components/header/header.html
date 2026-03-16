@@ -1,21 +1,25 @@
 <header class="header">
   <div class="header__container">
-    <a [routerLink]="routes.HOME" class="header__logo-link">
+    <button
+      type="button"
+      class="header__logo-button"
+      (click)="goHome()"
+    >
       <img
         class="header__logo"
         src="assets/pokedex-logo.png"
         [alt]="text.LOGO_ALT"
       />
-    </a>
+    </button>
     <button
       type="button"
       class="header__menu-button"
       [attr.aria-label]="text.OPEN_MENU_ARIA_LABEL"
       (click)="openMenu()"
     >
-      <span class="header__menu-line"></span>
-      <span class="header__menu-line"></span>
-      <span class="header__menu-line"></span>
+      @for (line of [1,2,3]; track line) {
+        <span class="header__menu-line"></span>
+      }
     </button>
   </div>
 </header>
@@ -24,13 +28,17 @@
   <div class="header__overlay" (click)="closeMenu()">
     <div class="header__menu" (click)="$event.stopPropagation()">
       <div class="header__menu-top">
-        <a [routerLink]="routes.HOME" class="header__logo-link" (click)="closeMenu()">
+        <button
+          type="button"
+          class="header__logo-button header__logo-button--menu"
+          (click)="goHome()"
+        >
           <img
             class="header__logo header__logo--menu"
             src="assets/pokedex-logo.png"
             [alt]="text.LOGO_ALT"
           />
-        </a>
+        </button>
 
         <button
           type="button"

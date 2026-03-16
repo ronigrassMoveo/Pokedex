@@ -16,6 +16,7 @@ import { PokemonFilterComponent } from '../../components/pokemon-filter/pokemon-
 import { PokemonService } from '../../services/pokemon.service';
 import { SearchHistoryService } from '../../services/search-history.service';
 import { FavoritesService } from '../../services/favorites.service';
+import { NavigationService } from '../../services/navigation.service';
 
 import { PokemonBase } from '../../models/pokemon.model';
 import { PokemonFilters } from '../../models/pokemon-filters.model';
@@ -46,6 +47,7 @@ export class HomePage implements OnInit {
   private cdr = inject(ChangeDetectorRef);
   private searchHistoryService = inject(SearchHistoryService);
   private favoritesService = inject(FavoritesService);
+  private navigationService = inject(NavigationService);
 
   readonly text = HOME_PAGE_TEXT;
   readonly historyText = SEARCH_HISTORY_TEXT;
@@ -71,6 +73,9 @@ export class HomePage implements OnInit {
 
   ngOnInit(): void {
     this.searchHistory = this.searchHistoryService.getHistory();
+    this.navigationService.homeReset$.subscribe(() => {
+      this.resetHomePage();
+    });
     this.loadPokemons(true);
   }
 
@@ -84,12 +89,13 @@ export class HomePage implements OnInit {
       })
       .subscribe({
         next: (response) => {
-          this.pokemonNotFound = false;
           this.total = response.total;
 
           this.pokemons = reset
             ? response.items
             : [...this.pokemons, ...response.items];
+
+          this.pokemonNotFound = this.pokemons.length === 0;
 
           this.cdr.detectChanges();
         },
@@ -111,7 +117,7 @@ export class HomePage implements OnInit {
     if (this.searchTerm) {
       this.searchHistory = this.searchHistoryService.saveSearch(this.searchTerm);
     }
-
+    this.showSearchHistory = false;
     this.loadPokemons(true);
   }
 
@@ -207,4 +213,15 @@ export class HomePage implements OnInit {
   get hasMore(): boolean {
     return this.pokemons.length < this.total;
   }
+
+  resetHomePage(): void {
+    this.searchInput = SEARCH.EMPTY_QUERY;
+    this.searchTerm = SEARCH.EMPTY_QUERY;
+    this.filters = { ...DEFAULT_POKEMON_FILTERS };
+    this.currentPage = PAGINATION.FIRST_PAGE;
+    this.pokemonNotFound = false;
+    this.isFilterOpen = false;
+    this.loadPokemons(true);
+  }
 }
+

@@ -32,7 +32,7 @@ export const HOME_PAGE_TEXT = {
   SEARCH_PLACEHOLDER: 'Search Pokémon',
   SEARCH_BUTTON: 'Search',
   FILTER_ARIA_LABEL: 'Open filters',
-  NOT_FOUND_MESSAGE: 'Pokemon not found',
+  NOT_FOUND_MESSAGE: 'No results found',
   LOAD_MORE: 'Load more...',
 };
 
@@ -64,7 +64,7 @@ export const ICON_SIZES = {
 export const FAVORITES_TEXT = {
   STORAGE_KEY: 'favorite_pokemons',
   EMPTY_MESSAGE: 'No favorite Pokémon yet.',
-  PAGE_TITLE: 'Favorites page',
+  PAGE_TITLE: 'Favorites',
   FAVORITE_ARIA_LABEL: 'Add to favorites',
   UNFAVORITE_ARIA_LABEL: 'Remove from favorites',
   REMOVE_ARIA_LABEL: 'Remove from favorites',
