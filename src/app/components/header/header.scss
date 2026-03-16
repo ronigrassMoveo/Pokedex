@@ -11,10 +11,17 @@
     padding: vars.$space-md;
   }
 
-  &__logo-link {
-    display: inline-flex;
-    align-items: center;
-    text-decoration: none;
+  &__logo-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+
+    &--menu {
+      text-decoration: none;
+    }
   }
 
   &__logo {

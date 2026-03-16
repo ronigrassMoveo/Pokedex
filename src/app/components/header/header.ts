@@ -1,6 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink} from '@angular/router';
 import { APP_ROUTES, HEADER_TEXT } from '../../constants/pokemon.constants';
+import { NavigationService } from '../../services/navigation.service';
+
 
 @Component({
   selector: 'app-header',
@@ -11,6 +13,7 @@ import { APP_ROUTES, HEADER_TEXT } from '../../constants/pokemon.constants';
 })
 export class Header {
   private router = inject(Router);
+  private navigationService = inject(NavigationService);
 
   readonly text = HEADER_TEXT;
   readonly routes = APP_ROUTES;
@@ -23,6 +26,12 @@ export class Header {
 
   closeMenu(): void {
     this.isMenuOpen = false;
+  }
+
+   goHome(): void {
+    this.closeMenu();
+    this.navigationService.triggerHomeReset();
+    this.router.navigate([this.routes.HOME]);
   }
 
   get isHomeActive(): boolean {
