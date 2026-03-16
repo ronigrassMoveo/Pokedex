@@ -1,14 +1,106 @@
 @use '../../../styles/_vars' as vars;
 
 .header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: vars.$space-md;
-}
+  background: vars.$color-white;
+  box-shadow: vars.$shadow-card;
 
-.header__logo {
-  max-width: 250px;
-  width: 80%;
-  height: auto;
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: vars.$space-md;
+  }
+
+  &__logo-link {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  &__logo {
+    max-width: 160px;
+    width: 100%;
+    height: auto;
+
+    &--menu {
+      max-width: 140px;
+    }
+  }
+
+  &__menu-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: vars.$space-xxs;
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  &__menu-line {
+    display: block;
+    width: 28px;
+    height: 3px;
+    border-radius: vars.$radius-sm;
+    background: vars.$color-black;
+  }
+
+  &__overlay {
+    position: fixed;
+    inset: 0;
+    background: vars.$color-overlay;
+    z-index: 1000;
+    padding: vars.$space-md;
+    box-sizing: border-box;
+  }
+
+  &__menu {
+    position: relative;
+    width: 100%;
+    min-height: 420px;
+    padding: vars.$space-md vars.$space-lg vars.$space-xl;
+    border-radius: 0 0 vars.$radius-xl vars.$radius-xl;
+    background: vars.$color-white;
+    box-shadow: vars.$shadow-card;
+    box-sizing: border-box;
+  }
+
+  &__menu-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: vars.$space-xl;
+  }
+
+  &__close-button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: vars.$mobile-label-size;
+    line-height: 1;
+    color: vars.$color-black;
+    padding: 0;
+  }
+
+  &__nav {
+    display: flex;
+    flex-direction: column;
+    gap: vars.$space-xl;
+    margin-top: vars.$space-lg;
+  }
+
+  &__nav-link {
+    text-decoration: none;
+    color: vars.$color-text-primary;
+    font-size: vars.$mobile-title-size;
+    line-height: vars.$line-height-base;
+    font-weight: vars.$font-weight-regular;
+
+    &--active {
+      color: vars.$color-grass-accent;
+    }
+  }
 }

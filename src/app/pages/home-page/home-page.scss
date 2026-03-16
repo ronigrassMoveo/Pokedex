@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: vars.$space-md;
   padding: vars.$space-md;
+  background: vars.$color-white;
 }
 
 .home-page__search-section {
@@ -126,7 +127,7 @@
   position: fixed;
   inset: 0;
   z-index: 1000;
-  background-color: rgba(0, 0, 0, 0.35);
+  background-color: vars.$color-overlay;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -145,7 +146,16 @@
   margin-top: vars.$space-lg;
 }
 
+.home-page__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: vars.$space-lg;
+  justify-content: center;
+}
+
 .home-page__card-link {
+  display: block;
+  width: 220px;
   text-decoration: none;
   color: inherit;
 }

@@ -3,12 +3,14 @@
 $color-white: #ffffff;
 $color-lightGray: #d3d3d3;
 $color-lavenderMist: #d9d9e3;
+$color-heart: #F55555;
 $color-background: #F7F7F9;
 $color-grass-accent: #94D97E;
 $color-yellow-accent: #FFCE31;
 
 $color-text-primary: #373299;   // pokemon name
 $color-header: #020166;
+$color-overlay: rgba(0, 0, 0, 0.35);
 
 
 // ===== Pokemon type colors =====
@@ -53,6 +55,7 @@ $mobile-text-small: 14px;
 $mobile-text-size: 18px;
 $mobile-subtitle-size: 22px;
 $mobile-title-size: 32px;
+$mobile-label-size: 48px;
 
 $font-weight-regular: 400;
 $font-weight-semibold: 600;

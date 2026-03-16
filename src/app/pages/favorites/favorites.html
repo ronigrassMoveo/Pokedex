@@ -1,1 +1,25 @@
-<p>favorites works!</p>
+<div class="favorites-page">
+  <h1 class="favorites-page__title">{{ text.PAGE_TITLE }}</h1>
+
+  @if (favoritePokemons.length === 0) {
+    <div class="favorites-page__empty-state">
+      {{ text.EMPTY_MESSAGE }}
+    </div>
+  } @else {
+    <div class="favorites-page__grid">
+      @for (pokemon of favoritePokemons; track pokemon.id) {
+        <a
+          class="favorites-page__card-link"
+          [routerLink]="['/pokemon', pokemon.id]"
+        >
+          <app-pokemon-card
+            [pokemon]="pokemon"
+            variant="list"
+            [showRemoveButton]="true"
+            (removeClicked)="removeFavorite(pokemon.id)"
+          />
+        </a>
+      }
+    </div>
+  }
+</div>

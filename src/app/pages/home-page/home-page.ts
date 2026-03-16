@@ -15,6 +15,7 @@ import { PokemonFilterComponent } from '../../components/pokemon-filter/pokemon-
 
 import { PokemonService } from '../../services/pokemon.service';
 import { SearchHistoryService } from '../../services/search-history.service';
+import { FavoritesService } from '../../services/favorites.service';
 
 import { PokemonBase } from '../../models/pokemon.model';
 import { PokemonFilters } from '../../models/pokemon-filters.model';
@@ -44,6 +45,7 @@ export class HomePage implements OnInit {
   private pokemonService = inject(PokemonService);
   private cdr = inject(ChangeDetectorRef);
   private searchHistoryService = inject(SearchHistoryService);
+  private favoritesService = inject(FavoritesService);
 
   readonly text = HOME_PAGE_TEXT;
   readonly historyText = SEARCH_HISTORY_TEXT;
@@ -173,6 +175,14 @@ export class HomePage implements OnInit {
     this.pokemonNotFound = false;
     this.isFilterOpen = false;
     this.loadPokemons(true);
+  }
+
+  isFavorite(pokemonId: number): boolean {
+    return this.favoritesService.isFavorite(pokemonId);
+  }
+
+  toggleFavorite(pokemon: PokemonBase): void {
+    this.favoritesService.toggleFavorite(pokemon);
   }
 
   @HostListener('document:click', ['$event'])

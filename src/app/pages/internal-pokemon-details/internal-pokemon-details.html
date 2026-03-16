@@ -3,6 +3,9 @@
     <app-pokemon-card
       [pokemon]="pokemon"
       [variant]="'details'"
+      [isFavorite]="isCurrentPokemonFavorite"
+      [showFavoriteButton]="true"
+      (favoriteToggled)="toggleFavorite()"
     ></app-pokemon-card>
   }
 </div>
