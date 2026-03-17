@@ -12,9 +12,36 @@ export const PAGINATION = {
   DEFAULT_PAGE_SIZE: 12,
 };
 
+// HomePage
+export const HOME_PAGE_TEXT = {
+  SEARCH_PLACEHOLDER: 'Search Pokémon',
+  SEARCH_BUTTON: 'Search',
+  FILTER_ARIA_LABEL: 'Open filters',
+  NOT_FOUND_MESSAGE: 'Pokemon not found',
+  LOAD_MORE: 'Load more...',
+};
+
 // Search
 export const SEARCH = {
   EMPTY_QUERY: '',
+};
+
+export const SEARCH_HISTORY_TEXT = {
+  STORAGE_KEY: 'pokemon-search-history',
+  MAX_ITEMS: 5,
+  TITLE: 'RECENT SEARCHES',
+  CLEAR_BUTTON: 'CLEAR',
+  REMOVE_BUTTON: '✕'
+};
+
+export const POKEMON_CARD_TEXT = {
+  DESCRIPTION_TITLE: 'Description',
+  STATS_TITLE: 'Stats',
+  TOTAL_LABEL: 'Total',
+};
+
+export const ICON_SIZES = {
+  FILTER: 22,
 };
 
 // Images

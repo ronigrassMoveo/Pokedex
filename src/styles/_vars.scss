@@ -1,6 +1,8 @@
 // ===== Main UI colors =====
 
 $color-white: #ffffff;
+$color-lightGray: #d3d3d3;
+$color-lavenderMist: #d9d9e3;
 $color-background: #F7F7F9;
 $color-grass-accent: #94D97E;
 $color-yellow-accent: #FFCE31;
@@ -30,9 +32,24 @@ $color-type-dark: #705746;
 $color-type-steel: #b7b7ce;
 $color-type-fairy: #d685ad;
 
+// ===== Pokemon filter colors =====
+
+$color-black: #2f2f2f;
+$color-blue: #4f80ff;
+$color-brown: #9b6b43;
+$color-gray: #9aa0a6;
+$color-green: #62b15a;
+$color-pink: #f38bb9;
+$color-purple: #8a63d2;
+$color-red: #eb5757;
+$color-americanSilver: #cfcfcf;
+$color-yellow: #f2c94c;
+    
+
 // ===== Typography =====
 $font-family-primary: 'Roboto', sans-serif;
 
+$mobile-text-small: 14px;
 $mobile-text-size: 18px;
 $mobile-subtitle-size: 22px;
 $mobile-title-size: 32px;
@@ -59,6 +76,7 @@ $radius-xs: 2px;
 $radius-sm: 8px;
 $radius-md: 14px;
 $radius-lg: 16px;
+$radius-xl: 20px;
 
 // ===== Shadows =====
 $shadow-card: 0 4px 14px rgba(0, 0, 0, 0.12);

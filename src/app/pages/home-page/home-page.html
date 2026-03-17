@@ -1,4 +1,114 @@
 <div class="home-page">
+  <div class="home-page__search-section" #searchContainer>
+    <div class="home-page__search-row">
+      <input
+        class="home-page__search-input"
+        type="text"
+        [(ngModel)]="searchInput"
+        (focus)="showSearchHistory = true"
+        (ngModelChange)="onSearchInputChange()"
+        [placeholder]="text.SEARCH_PLACEHOLDER"
+      />
+
+      <button
+        class="home-page__search-button"
+        type="button"
+        (click)="onSearch()"
+      >
+        {{ text.SEARCH_BUTTON }}
+      </button>
+
+      <button
+        class="home-page__filter-button"
+        type="button"
+        (click)="openFilters()"
+        [attr.aria-label]="text.FILTER_ARIA_LABEL"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          [attr.width]="iconSizes.FILTER"
+          [attr.height]="iconSizes.FILTER"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <line x1="4" y1="6" x2="20" y2="6"></line>
+          <circle cx="10" cy="6" r="2"></circle>
+
+          <line x1="4" y1="12" x2="20" y2="12"></line>
+          <circle cx="14" cy="12" r="2"></circle>
+
+          <line x1="4" y1="18" x2="20" y2="18"></line>
+          <circle cx="8" cy="18" r="2"></circle>
+        </svg>
+      </button>
+    </div>
+
+    @if (showSearchHistory && searchHistory.length > 0) {
+      <div class="home-page__search-history-dropdown">
+        <div class="home-page__search-history-header">
+          <span class="home-page__search-history-title">{{ historyText.TITLE }}</span>
+
+          <button
+            type="button"
+            class="home-page__search-history-clear"
+            (click)="clearSearchHistory()"
+          >
+            {{ historyText.CLEAR_BUTTON }}
+          </button>
+        </div>
+
+        @for (item of searchHistory; track item) {
+          <div class="home-page__search-history-item">
+            <button
+              type="button"
+              class="home-page__search-history-text"
+              (click)="selectHistoryItem(item)"
+            >
+              {{ item }}
+            </button>
+
+            <button
+              type="button"
+              class="home-page__search-history-remove"
+              (click)="removeHistoryItem(item)"
+            >
+              {{ historyText.REMOVE_BUTTON }}
+            </button>
+          </div>
+        }
+      </div>
+    }
+  </div>
+
+  @if (isFilterOpen) {
+    <div
+      class="home-page__filter-overlay"
+      (click)="closeFilters()"
+    >
+      <div
+        class="home-page__filter-modal"
+        (click)="$event.stopPropagation()"
+      >
+        <app-pokemon-filter
+          [filters]="filters"
+          (apply)="applyFilters($event)"
+          (clear)="clearFilters()"
+          (close)="closeFilters()"
+        />
+      </div>
+    </div>
+  }
+
+  @if (pokemonNotFound) {
+    <div class="home-page__not-found">
+      {{ text.NOT_FOUND_MESSAGE }}
+    </div>
+  }
+
   @for (pokemon of pokemons; track pokemon.id) {
     <a
       class="home-page__card-link"
@@ -13,7 +123,7 @@
 
   @if (hasMore && !searchTerm) {
     <div class="home-page__load-more">
-      <button (click)="loadMore()">Load more...</button>
+      <button type="button" (click)="loadMore()">{{ text.LOAD_MORE }}</button>
     </div>
   }
 </div>

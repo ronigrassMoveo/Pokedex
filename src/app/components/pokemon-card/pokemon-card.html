@@ -45,7 +45,7 @@
 
     @if ('description' in pokemon) {
       <div class="pokemon-card__section">
-        <h4 class="pokemon-card__section-title">Description</h4>
+        <h4 class="pokemon-card__section-title">{{ text.DESCRIPTION_TITLE }}</h4>
         <p
           class="pokemon-card__description"
           [class.pokemon-card__description--details]="true"
@@ -57,7 +57,7 @@
 
     @if ('stats' in pokemon) {
       <div class="pokemon-card__section pokemon-card__section--stats">
-        <h4 class="pokemon-card__section-title">Stats</h4>
+        <h4 class="pokemon-card__section-title">{{ text.STATS_TITLE }}</h4>
 
         <div
           class="pokemon-card__stats"
@@ -70,7 +70,7 @@
           }
 
           <p class="pokemon-card__stat-line pokemon-card__stat-line--total">
-            Total:
+            {{ text.TOTAL_LABEL }}:
             {{
               ('stats' in pokemon)
                 ? pokemon.stats.reduce((sum, stat) => sum + stat.value, 0)

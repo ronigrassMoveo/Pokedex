@@ -1,0 +1,111 @@
+<div class="pokemon-filter">
+  <div class="pokemon-filter__header">
+    <h2 class="pokemon-filter__title">{{ text.TITLE }}</h2>
+
+    <button
+      type="button"
+      class="pokemon-filter__close-button"
+      (click)="onClose()"
+      aria-label="Close filters"
+    >
+      {{ text.DELETE_BUTTON }}
+    </button>
+  </div>
+
+  <div class="pokemon-filter__section">
+    <label class="pokemon-filter__label" for="type">{{ text.TYPE_LABEL }}</label>
+
+    <select
+      id="type"
+      class="pokemon-filter__select"
+      [(ngModel)]="draftFilters.type"
+    >
+      <option [ngValue]="null">{{ text.ALL_OPTION }}</option>
+
+      @for (type of types; track type) {
+        <option [value]="type">
+          {{ typeLabels[type] }}
+        </option>
+      }
+    </select>
+  </div>
+
+  <div class="pokemon-filter__section">
+    <label class="pokemon-filter__label" for="ability">{{ text.ABILITY_LABEL }}</label>
+
+    <select
+      id="ability"
+      class="pokemon-filter__select"
+      [(ngModel)]="draftFilters.ability"
+    >
+      <option [ngValue]="null">{{ text.ALL_OPTION }}</option>
+
+      @for (ability of abilities; track ability) {
+        <option [value]="ability">
+          {{ abilityLabels[ability] }}
+        </option>
+      }
+    </select>
+  </div>
+
+ <div class="pokemon-filter__section">
+  <label class="pokemon-filter__label" for="generation">{{ text.GENERATION_LABEL }}</label>
+
+      <select
+      id="generation"
+      class="pokemon-filter__select"
+      [(ngModel)]="draftFilters.generation"
+    >
+      <option [ngValue]="null">{{ text.ALL_OPTION }}</option>
+
+      @for (generation of generations; track generation) {
+        <option [ngValue]="generation">
+          {{ generationLabels[generation] }}
+        </option>
+      }
+    </select>
+ </div>
+
+  <div class="pokemon-filter__section">
+    <p class="pokemon-filter__label">{{ text.COLOR_LABEL }}</p>
+
+    <div class="pokemon-filter__colors">
+      @for (color of colors; track color) {
+        <button
+          type="button"
+          class="pokemon-filter__color-button"
+          [class.pokemon-filter__color-button--selected]="draftFilters.color === color"
+          [attr.aria-label]="colorLabels[color]"
+          (click)="onSelectColor(color)"
+        >
+          <span
+            class="pokemon-filter__color-swatch"
+            [class]="'pokemon-filter__color-swatch--' + color"
+          ></span>
+
+          <span class="pokemon-filter__color-name">
+            {{ colorLabels[color] }}
+          </span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="pokemon-filter__actions">
+    <button
+      type="button"
+      class="pokemon-filter__action-button pokemon-filter__action-button--secondary"
+      (click)="onClear()"
+    >
+      {{ text.CLEAR_BUTTON }}
+    </button>
+
+    <button
+      type="button"
+      class="pokemon-filter__action-button pokemon-filter__action-button--primary"
+      (click)="onApply()"
+    >
+      {{ text.APPLY_BUTTON }}
+    </button>
+  </div>
+</div>

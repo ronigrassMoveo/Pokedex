@@ -1,8 +1,10 @@
+@use '../../../styles/_vars' as vars;
+
 .header {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 16px;
+  padding: vars.$space-md;
 }
 
 .header__logo {
