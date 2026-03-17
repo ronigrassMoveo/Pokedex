@@ -19,6 +19,7 @@ export const HEADER_TEXT = {
 export const APP_ROUTES = {
   HOME: '',
   FAVORITES: 'favorites',
+  GO_BACK: '← Home page',
 } as const;
 
 // Pagination

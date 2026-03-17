@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { Router, RouterLink} from '@angular/router';
 import { APP_ROUTES, HEADER_TEXT } from '../../constants/pokemon.constants';
 import { NavigationService } from '../../services/navigation.service';
+import { ScreenService } from '../../services/screen.service';
 
 
 @Component({
@@ -14,9 +15,12 @@ import { NavigationService } from '../../services/navigation.service';
 export class Header {
   private router = inject(Router);
   private navigationService = inject(NavigationService);
+  private screenService = inject(ScreenService);
 
   readonly text = HEADER_TEXT;
   readonly routes = APP_ROUTES;
+  readonly isDesktop = this.screenService.isDesktop;
+  readonly isMobile = this.screenService.isMobile;
 
   isMenuOpen = false;
 

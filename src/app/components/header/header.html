@@ -1,74 +1,110 @@
-<header class="header">
-  <div class="header__container">
-    <button
-      type="button"
-      class="header__logo-button"
-      (click)="goHome()"
-    >
-      <img
-        class="header__logo"
-        src="assets/pokedex-logo.png"
-        [alt]="text.LOGO_ALT"
-      />
-    </button>
-    <button
-      type="button"
-      class="header__menu-button"
-      [attr.aria-label]="text.OPEN_MENU_ARIA_LABEL"
-      (click)="openMenu()"
-    >
-      @for (line of [1,2,3]; track line) {
-        <span class="header__menu-line"></span>
-      }
-    </button>
-  </div>
-</header>
+@if (isDesktop()) {
+  <header class="header header--desktop">
+    <div class="header__desktop-bar">
+      <button
+        type="button"
+        class="header__logo-button"
+        (click)="goHome()"
+      >
+        <img
+          class="header__logo header__logo--desktop"
+          src="assets/pokedex-logo.png"
+          [alt]="text.LOGO_ALT"
+        />
+      </button>
 
-@if (isMenuOpen) {
-  <div class="header__overlay" (click)="closeMenu()">
-    <div class="header__menu" (click)="$event.stopPropagation()">
-      <div class="header__menu-top">
-        <button
-          type="button"
-          class="header__logo-button header__logo-button--menu"
-          (click)="goHome()"
-        >
-          <img
-            class="header__logo header__logo--menu"
-            src="assets/pokedex-logo.png"
-            [alt]="text.LOGO_ALT"
-          />
-        </button>
-
-        <button
-          type="button"
-          class="header__close-button"
-          [attr.aria-label]="text.CLOSE_MENU_ARIA_LABEL"
-          (click)="closeMenu()"
-        >
-          {{ text.CLOSE_BUTTON }}
-        </button>
-      </div>
-
-      <nav class="header__nav">
+      <nav class="header__desktop-nav">
         <a
-          class="header__nav-link"
-          [class.header__nav-link--active]="isHomeActive"
+          class="header__desktop-link"
+          [class.header__desktop-link--active]="isHomeActive"
           [routerLink]="routes.HOME"
-          (click)="closeMenu()"
         >
           {{ text.HOME_LABEL }}
         </a>
 
         <a
-          class="header__nav-link"
-          [class.header__nav-link--active]="isFavoritesActive"
+          class="header__desktop-link"
+          [class.header__desktop-link--active]="isFavoritesActive"
           [routerLink]="routes.FAVORITES"
-          (click)="closeMenu()"
         >
           {{ text.FAVORITES_LABEL }}
         </a>
       </nav>
     </div>
-  </div>
+  </header>
+} @else {
+  <header class="header">
+    <div class="header__container">
+      <button
+        type="button"
+        class="header__logo-button"
+        (click)="goHome()"
+      >
+        <img
+          class="header__logo"
+          src="assets/pokedex-logo.png"
+          [alt]="text.LOGO_ALT"
+        />
+      </button>
+      <button
+        type="button"
+        class="header__menu-button"
+        [attr.aria-label]="text.OPEN_MENU_ARIA_LABEL"
+        (click)="openMenu()"
+      >
+        @for (line of [1,2,3]; track line) {
+          <span class="header__menu-line"></span>
+        }
+      </button>
+    </div>
+  </header>
+
+  @if (isMenuOpen) {
+    <div class="header__overlay" (click)="closeMenu()">
+      <div class="header__menu" (click)="$event.stopPropagation()">
+        <div class="header__menu-top">
+          <button
+            type="button"
+            class="header__logo-button header__logo-button--menu"
+            (click)="goHome()"
+          >
+            <img
+              class="header__logo header__logo--menu"
+              src="assets/pokedex-logo.png"
+              [alt]="text.LOGO_ALT"
+            />
+          </button>
+
+          <button
+            type="button"
+            class="header__close-button"
+            [attr.aria-label]="text.CLOSE_MENU_ARIA_LABEL"
+            (click)="closeMenu()"
+          >
+            {{ text.CLOSE_BUTTON }}
+          </button>
+        </div>
+
+        <nav class="header__nav">
+          <a
+            class="header__nav-link"
+            [class.header__nav-link--active]="isHomeActive"
+            [routerLink]="routes.HOME"
+            (click)="closeMenu()"
+          >
+            {{ text.HOME_LABEL }}
+          </a>
+
+          <a
+            class="header__nav-link"
+            [class.header__nav-link--active]="isFavoritesActive"
+            [routerLink]="routes.FAVORITES"
+            (click)="closeMenu()"
+          >
+            {{ text.FAVORITES_LABEL }}
+          </a>
+        </nav>
+      </div>
+    </div>
+  }
 }

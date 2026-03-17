@@ -1,14 +1,42 @@
 @use '../../../styles/_vars' as vars;
 
-
 .internal-pokemon-details {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   padding: vars.$space-sm;
+
+  &__back-button {
+    align-self: flex-start;
+    border: none;
+    background: transparent;
+    color: vars.$color-text-primary;
+    cursor: pointer;
+    font-size: vars.$mobile-text-size;
+    font-family: vars.$font-family-primary;
+    padding: 0;
+    margin-bottom: vars.$space-md;
+  }
+
+  &__card-wrapper {
+    width: 100%;
+    max-width: 430px;
+  }
 }
 
-.internal-pokemon-details app-pokemon-card {
-  display: block;
-  width: 100%;
-  max-width: 430px;
+@media (min-width: 1024px) {
+  .internal-pokemon-details {
+    align-items: flex-start;
+    padding: vars.$space-xl vars.$space-2xl;
+
+    &__back-button {
+      margin-left: vars.$space-2xl;
+      margin-bottom: vars.$space-lg;
+    }
+
+    &__card-wrapper {
+      max-width: 844px;
+      margin-left: vars.$space-2xl;
+    }
+  }
 }

@@ -1,10 +1,12 @@
 import { ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { PokemonCardComponent } from '../../components/pokemon-card/pokemon-card';
 import { PokemonDetails } from '../../models/pokemon.model';
 import { PokemonService } from '../../services/pokemon.service';
 import { FavoritesService } from '../../services/favorites.service';
+import { ScreenService } from '../../services/screen.service';
+import { APP_ROUTES } from '../../constants/pokemon.constants';
 
 @Component({
   selector: 'app-internal-pokemon-details',
@@ -18,6 +20,11 @@ export class InternalPokemonDetails implements OnInit {
   private pokemonService = inject(PokemonService);
   private cdr = inject(ChangeDetectorRef);
   private favoritesService = inject(FavoritesService);
+  private screenService = inject(ScreenService);
+  private router = inject(Router);
+
+  readonly isDesktop = this.screenService.isDesktop;
+  readonly routes = APP_ROUTES;
 
   pokemon?: PokemonDetails;
 
@@ -33,6 +40,10 @@ export class InternalPokemonDetails implements OnInit {
         console.error('pokemon details load error:', error);
       },
     });
+  }
+
+  goBackHome(): void {
+    this.router.navigate([this.routes.HOME]);
   }
 
   get isCurrentPokemonFavorite(): boolean {

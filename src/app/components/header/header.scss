@@ -4,6 +4,44 @@
   background: vars.$color-white;
   box-shadow: vars.$shadow-card;
 
+  &--desktop {
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+  }
+
+  &__desktop-bar {
+    display: flex;
+    align-items: stretch;
+    justify-content: space-between;
+    background: vars.$color-header;
+    min-height: 60px;
+    width: 100%;
+  }
+
+  &__desktop-nav {
+    display: flex;
+    align-items: stretch;
+  }
+
+  &__desktop-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 92px;
+    padding: 0 vars.$space-lg;
+    text-decoration: none;
+    color: vars.$color-white;
+    font-size: vars.$mobile-text-size;
+    font-weight: vars.$font-weight-regular;
+    background: vars.$color-header;
+
+    &--active {
+      background: vars.$color-grass-accent;
+      color: vars.$color-black;
+    }
+  }
+
   &__container {
     display: flex;
     align-items: center;
