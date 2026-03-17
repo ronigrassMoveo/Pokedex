@@ -109,6 +109,7 @@
     </div>
   }
 
+  <div class="home-page__grid">
   @for (pokemon of pokemons; track pokemon.id) {
     <a
       class="home-page__card-link"
@@ -117,9 +118,13 @@
       <app-pokemon-card
         [pokemon]="pokemon"
         variant="list"
+        [isFavorite]="isFavorite(pokemon.id)"
+        [showFavoriteButton]="true"
+        (favoriteToggled)="toggleFavorite(pokemon)"
       />
     </a>
   }
+</div>
 
   @if (hasMore && !searchTerm) {
     <div class="home-page__load-more">

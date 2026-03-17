@@ -6,6 +6,21 @@ export const POKEMON_ENDPOINTS = {
   species: `${POKEMON_API_BASE_URL}/pokemon-species`,
 };
 
+// Header
+export const HEADER_TEXT = {
+  LOGO_ALT: 'Pokedex',
+  OPEN_MENU_ARIA_LABEL: 'Open menu',
+  CLOSE_MENU_ARIA_LABEL: 'Close menu',
+  HOME_LABEL: 'Home',
+  FAVORITES_LABEL: 'Favorites',
+  CLOSE_BUTTON: '×',
+} as const;
+
+export const APP_ROUTES = {
+  HOME: '',
+  FAVORITES: 'favorites',
+} as const;
+
 // Pagination
 export const PAGINATION = {
   FIRST_PAGE: 1,
@@ -38,11 +53,22 @@ export const POKEMON_CARD_TEXT = {
   DESCRIPTION_TITLE: 'Description',
   STATS_TITLE: 'Stats',
   TOTAL_LABEL: 'Total',
+  REMOVE_BUTTON: '✕'
 };
 
 export const ICON_SIZES = {
   FILTER: 22,
 };
+
+// Favorites
+export const FAVORITES_TEXT = {
+  STORAGE_KEY: 'favorite_pokemons',
+  EMPTY_MESSAGE: 'No favorite Pokémon yet.',
+  PAGE_TITLE: 'Favorites page',
+  FAVORITE_ARIA_LABEL: 'Add to favorites',
+  UNFAVORITE_ARIA_LABEL: 'Remove from favorites',
+  REMOVE_ARIA_LABEL: 'Remove from favorites',
+} as const;
 
 // Images
 export const POKEMON_IMAGE_BASE_URL =

@@ -1,7 +1,66 @@
 <header class="header">
-  <img
-    class="header__logo"
-    src="assets/pokedex-logo.png"
-    alt="Pokedex"
-  />
+  <div class="header__container">
+    <a [routerLink]="routes.HOME" class="header__logo-link">
+      <img
+        class="header__logo"
+        src="assets/pokedex-logo.png"
+        [alt]="text.LOGO_ALT"
+      />
+    </a>
+    <button
+      type="button"
+      class="header__menu-button"
+      [attr.aria-label]="text.OPEN_MENU_ARIA_LABEL"
+      (click)="openMenu()"
+    >
+      <span class="header__menu-line"></span>
+      <span class="header__menu-line"></span>
+      <span class="header__menu-line"></span>
+    </button>
+  </div>
 </header>
+
+@if (isMenuOpen) {
+  <div class="header__overlay" (click)="closeMenu()">
+    <div class="header__menu" (click)="$event.stopPropagation()">
+      <div class="header__menu-top">
+        <a [routerLink]="routes.HOME" class="header__logo-link" (click)="closeMenu()">
+          <img
+            class="header__logo header__logo--menu"
+            src="assets/pokedex-logo.png"
+            [alt]="text.LOGO_ALT"
+          />
+        </a>
+
+        <button
+          type="button"
+          class="header__close-button"
+          [attr.aria-label]="text.CLOSE_MENU_ARIA_LABEL"
+          (click)="closeMenu()"
+        >
+          {{ text.CLOSE_BUTTON }}
+        </button>
+      </div>
+
+      <nav class="header__nav">
+        <a
+          class="header__nav-link"
+          [class.header__nav-link--active]="isHomeActive"
+          [routerLink]="routes.HOME"
+          (click)="closeMenu()"
+        >
+          {{ text.HOME_LABEL }}
+        </a>
+
+        <a
+          class="header__nav-link"
+          [class.header__nav-link--active]="isFavoritesActive"
+          [routerLink]="routes.FAVORITES"
+          (click)="closeMenu()"
+        >
+          {{ text.FAVORITES_LABEL }}
+        </a>
+      </nav>
+    </div>
+  </div>
+}

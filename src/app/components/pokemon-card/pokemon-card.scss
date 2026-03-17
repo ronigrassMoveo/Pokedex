@@ -1,11 +1,18 @@
 @use '../../../styles/_vars' as vars;
 
+:host {
+  display: block;
+  width: 100%;
+}
+
 .pokemon-card {
   width: 100%;
   border-radius: vars.$radius-lg;
   padding: vars.$space-sm;
-  background: vars.$color-background;
+  background: vars.$color-white;
   box-shadow: vars.$shadow-card;
+  position: relative;
+  box-sizing: border-box;
 
   &--list {
     display: flex;
@@ -14,7 +21,7 @@
     gap: vars.$space-xs;
     padding: vars.$space-sm;
     text-align: center;
-    background: vars.$color-white;
+    background: vars.$color-background;
   }
 
   &--details {
@@ -29,27 +36,77 @@
     margin: 0;
     font-weight: vars.$font-weight-regular;
     color: vars.$color-text-primary;
+    width: 100%;
+    text-align: left;
   }
 
   &__id--details {
-    width: 100%;
     font-size: vars.$mobile-subtitle-size;
     line-height: vars.$line-height-relaxed;
-    text-align: left;
     margin-bottom: vars.$space-sm;
   }
 
+  &__favorite-button,
+  &__remove-button {
+    position: absolute;
+    top: vars.$space-sm;
+    right: vars.$space-sm;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  &__favorite-button {
+    width: 32px;
+    height: 32px;
+  }
+
+  &__favorite-icon {
+    width: 20px;
+    height: 19px;
+    display: block;
+
+    path {
+      fill: transparent;
+      stroke: vars.$color-text-primary;
+      stroke-width: 2;
+      stroke-linejoin: round;
+      stroke-linecap: round;
+      transition: fill 0.2s ease, stroke 0.2s ease;
+    }
+  }
+
+  &__favorite-button--active {
+    .pokemon-card__favorite-icon path {
+      fill: vars.$color-heart;
+      stroke: vars.$color-heart;
+    }
+  }
+
+  &__remove-button {
+    font-size: 32px;
+    line-height: 1;
+    color: vars.$color-text-primary;
+  }
+
   &__image {
+    width: 120px;
+    height: 120px;
     object-fit: contain;
     display: block;
     margin: 0 auto;
+    image-rendering: pixelated;
   }
 
   &__image--details {
     width: 280px;
     height: 280px;
     margin-bottom: vars.$space-sm;
-    image-rendering: pixelated;
   }
 
   &__name {
@@ -57,6 +114,7 @@
     text-transform: capitalize;
     text-align: center;
     color: vars.$color-text-primary;
+    font-size: vars.$mobile-subtitle-size;
   }
 
   &__name--details {
@@ -70,17 +128,17 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    gap: vars.$space-xs;
   }
 
   &__types--details {
-    display: flex;
     justify-content: center;
     gap: vars.$space-sm;
     margin-bottom: vars.$space-xl;
     flex-wrap: nowrap;
   }
 
-    &__type {
+  &__type {
     width: 140px;
     padding: vars.$space-xs vars.$space-sm;
     border-radius: vars.$radius-md;

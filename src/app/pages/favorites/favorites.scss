@@ -1,0 +1,30 @@
+@use '../../../styles/_vars' as vars;
+
+.favorites-page {
+  padding: vars.$space-lg;
+
+  &__title {
+    margin: 0 0 vars.$space-lg;
+    font-size: vars.$mobile-subtitle-size;
+    font-weight: vars.$font-weight-regular;
+    color: vars.$color-gray;
+  }
+
+  &__grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: vars.$space-lg;
+  }
+
+  &__card-link {
+    display: block;
+    width: 220px;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  &__empty-state {
+    color: vars.$color-text-primary;
+    font-size: vars.$mobile-subtitle-size;
+  }
+}

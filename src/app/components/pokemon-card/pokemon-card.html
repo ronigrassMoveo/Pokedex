@@ -10,6 +10,41 @@
     {{ formattedId }}
   </p>
 
+  @if (showRemoveButton) {
+    <button
+      type="button"
+      class="pokemon-card__remove-button"
+      [attr.aria-label]="favoritesText.REMOVE_ARIA_LABEL"
+      (click)="onRemoveClick($event)"
+    >
+      {{ text.REMOVE_BUTTON }}
+    </button>
+  }
+
+  @if (showFavoriteButton) {
+    <button
+      type="button"
+      class="pokemon-card__favorite-button"
+      [class.pokemon-card__favorite-button--active]="isFavorite"
+      [attr.aria-label]="
+        isFavorite
+          ? favoritesText.UNFAVORITE_ARIA_LABEL
+          : favoritesText.FAVORITE_ARIA_LABEL
+      "
+      (click)="onFavoriteClick($event)"
+    >
+      <svg
+        class="pokemon-card__favorite-icon"
+        viewBox="0 0 20 19"
+        aria-hidden="true"
+      >
+        <path
+          d="M15.0479 1C17.2103 1.00011 18.9769 2.81958 19 5.05176C19.0506 10.1307 14.9958 13.8919 9.99902 17.2959C5.00229 13.8921 0.948905 10.1302 1 5.05176C1.0231 2.81959 2.78975 1.00012 4.95215 1C6.28804 1 7.31131 1.65353 8.03906 2.37598C8.40071 2.73504 8.67393 3.09687 8.85547 3.36816C8.94557 3.50284 9.01176 3.61326 9.05371 3.68652C9.07464 3.72309 9.09 3.75043 9.09863 3.7666C9.10191 3.77274 9.10399 3.77743 9.10547 3.78027C9.27486 4.11906 9.62123 4.33301 10 4.33301C10.3787 4.33301 10.7241 4.1189 10.8936 3.78027C10.895 3.77747 10.8979 3.77304 10.9014 3.7666C10.91 3.75043 10.9254 3.72309 10.9463 3.68652C10.9882 3.61326 11.0544 3.50284 11.1445 3.36816C11.3261 3.09687 11.5993 2.73505 11.9609 2.37598C12.6887 1.65352 13.712 1 15.0479 1Z"
+        />
+      </svg>
+    </button>
+  }
+
   <img
     class="pokemon-card__image"
     [class.pokemon-card__image--details]="variant === 'details'"

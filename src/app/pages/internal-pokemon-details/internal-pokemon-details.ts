@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { PokemonCardComponent } from '../../components/pokemon-card/pokemon-card';
 import { PokemonDetails } from '../../models/pokemon.model';
 import { PokemonService } from '../../services/pokemon.service';
+import { FavoritesService } from '../../services/favorites.service';
 
 @Component({
   selector: 'app-internal-pokemon-details',
@@ -16,6 +17,7 @@ export class InternalPokemonDetails implements OnInit {
   private route = inject(ActivatedRoute);
   private pokemonService = inject(PokemonService);
   private cdr = inject(ChangeDetectorRef);
+  private favoritesService = inject(FavoritesService);
 
   pokemon?: PokemonDetails;
 
@@ -31,5 +33,21 @@ export class InternalPokemonDetails implements OnInit {
         console.error('pokemon details load error:', error);
       },
     });
+  }
+
+  get isCurrentPokemonFavorite(): boolean {
+    if (!this.pokemon) {
+      return false;
+    }
+
+    return this.favoritesService.isFavorite(this.pokemon.id);
+  }
+
+  toggleFavorite(): void {
+    if (!this.pokemon) {
+      return;
+    }
+
+    this.favoritesService.toggleFavorite(this.pokemon);
   }
 }
