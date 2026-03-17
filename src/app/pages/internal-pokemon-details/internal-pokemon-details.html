@@ -1,4 +1,13 @@
 <div class="internal-pokemon-details">
+  @if (isDesktop()) {
+    <button
+      type="button"
+      class="internal-pokemon-details__back-button"
+      (click)="goBackHome()"
+    >
+      {{ routes.GO_BACK }}
+    </button>
+  }
   @if (pokemon) {
     <app-pokemon-card
       [pokemon]="pokemon"
